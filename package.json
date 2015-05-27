@@ -1,0 +1,33 @@
+{
+  "name": "ccjsp",
+  "version": "1.0.0",
+  "description": "A simple command-line tool to build the all the JS files referenced in a JSP through closure-compiler (it that's your thing)",
+  "main": "index.js",
+  "bin": {
+    "ccjsp": "./bin/ccjsp.sh"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DamonOehlman/ccjsp.git"
+  },
+  "keywords": [
+    "closure-compiler"
+  ],
+  "author": "Damon Oehlman <damon.oehlman@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DamonOehlman/ccjsp/issues"
+  },
+  "homepage": "https://github.com/DamonOehlman/ccjsp#readme",
+  "dependencies": {
+    "google-closure-compiler": "^20150505.0.0",
+    "nopt": "^3.0.2",
+    "parse-attributes": "0.0.1",
+    "reu": "^1.1.1",
+    "through": "^2.3.7",
+    "whisk": "^1.3.0"
+  }
+}
