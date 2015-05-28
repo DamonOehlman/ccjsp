@@ -5,4 +5,4 @@ var knownOpts = {
   path: [path, Array]
 };
 
-process.stdin.pipe(require('..')(nopt(knownOpts, {}, process.argv, 2)));
+process.stdin.pipe(require('..')(nopt(knownOpts, {}, process.argv, 2))).pipe(process.stdout);

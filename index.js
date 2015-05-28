@@ -37,7 +37,7 @@ module.exports = function(opts) {
     }).filter(Boolean);
 
     // extract c:url elements if they exist
-    files = files.concat(lines
+    lines
       .map(extractJspUrl)
       .map(pluck(1))
       .map(toAttributes)
@@ -48,19 +48,13 @@ module.exports = function(opts) {
       .map(addBasePaths)
       .reduce(flatten, [])
       .filter(fs.existsSync)
-    );
+      .map(function(filename) {
+        return filename + '\n';
+      })
+      .forEach(this.queue.bind(this));
   }
 
   function end() {
-    var args = [
-      '-jar',
-      path.resolve(__dirname, 'node_modules/google-closure-compiler/compiler.jar')
-    ].concat(remain).concat(files);
-    var proc = spawn('java', args, { stdio: 'inherit' });
-
-    proc.on('close', function() {
-      console.log('done');
-    });
   }
 
   return through(write, end);
