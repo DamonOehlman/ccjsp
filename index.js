@@ -3,7 +3,6 @@ var path = require('path');
 var through = require('through');
 var flatten = require('whisk/flatten');
 var reLineBreak = require('reu/newline');
-var spawn = require('child_process').spawn;
 var reHttp = /^http/;
 var reScript = /\<script(.*?)\><\/script\>/i;
 var rePreprocessedUrl = /\<c\:url(.*)\/\>/i;
@@ -19,7 +18,6 @@ function isLocal(path) {
 }
 
 module.exports = function(opts) {
-  var files = [];
   var remain = ((opts || {}).argv || {}).remain || [];
 
   function addBasePaths(file) {
@@ -54,8 +52,5 @@ module.exports = function(opts) {
       .forEach(this.queue.bind(this));
   }
 
-  function end() {
-  }
-
-  return through(write, end);
+  return through(write, function() {});
 };
