@@ -23,7 +23,6 @@
   },
   "homepage": "https://github.com/buildjs/rig-html#readme",
   "dependencies": {
-    "google-closure-compiler": "^20150505.0.0",
     "nopt": "^3.0.2",
     "parse-attributes": "0.0.1",
     "reu": "^1.1.1",
