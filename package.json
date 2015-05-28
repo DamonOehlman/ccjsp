@@ -1,6 +1,6 @@
 {
   "name": "rig-html",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A simple command-line tool to build the all the JS files referenced in a JSP through closure-compiler (it that's your thing)",
   "main": "index.js",
   "bin": {
