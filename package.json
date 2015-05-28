@@ -17,7 +17,7 @@
     "closure-compiler"
   ],
   "author": "Damon Oehlman <damon.oehlman@gmail.com>",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/buildjs/rig-html/issues"
   },
