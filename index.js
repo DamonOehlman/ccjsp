@@ -5,7 +5,6 @@ var flatten = require('whisk/flatten');
 var reLineBreak = require('reu/newline');
 var reHttp = /^http/;
 var reScript = /\<script(.*?)\><\/script\>/i;
-var reCrossOrigin = /crossorigin/i;
 var rePreprocessedUrl = /\<c\:url(.*)\/\>/i;
 var pluck = require('whisk/pluck');
 var toAttributes = require('parse-attributes');
@@ -14,8 +13,12 @@ function extractJspUrl(result) {
   return rePreprocessedUrl.exec(result[1]) || result;
 }
 
-function notCrossOrigin(result) {
-  return !reCrossOrigin.test(result[0]);
+function isIncluded(includedPaths) {
+  return function(path) {
+    return !includedPaths || includedPaths.some(function(prefix) {
+      return path.slice(0, prefix.length) === prefix;
+    });
+  };
 }
 
 function isLocal(path) {
@@ -41,7 +44,6 @@ module.exports = function(opts) {
 
     // extract c:url elements if they exist
     lines
-      .filter(notCrossOrigin)
       .map(extractJspUrl)
       .map(pluck(1))
       .map(toAttributes)
@@ -49,6 +51,7 @@ module.exports = function(opts) {
         return data.value || data.src;
       })
       .filter(isLocal)
+      .filter(isIncluded(opts.include))
       .map(addBasePaths)
       .reduce(flatten, [])
       .filter(fs.existsSync)
